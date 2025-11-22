@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى الغالية نور</title>
+    <!-- استدعاء خط عربي جميل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    
+    <!-- استدعاء Tailwind CSS للتنسيق السريع -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* إعدادات عامة */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        /* تأثير النجوم في الخلفية */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1.2); box-shadow: 0 0 10px white; }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        /* تصميم البطاقة */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* توهج الاسم */
+        .glowing-text {
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #f09,
+                0 0 82px #f09,
+                0 0 92px #f09;
+            animation: pulsate 1.5s infinite alternate;
+        }
+
+        @keyframes pulsate {
+            100% {
+                text-shadow:
+                0 0 4px #fff,
+                0 0 11px #fff,
+                0 0 19px #fff,
+                0 0 40px #f09,
+                0 0 80px #f09,
+                0 0 90px #f09,
+                0 0 100px #f09;
+            }
+            0% {
+                text-shadow:
+                0 0 2px #fff,
+                0 0 4px #fff,
+                0 0 6px #fff,
+                0 0 10px #f09,
+                0 0 45px #f09,
+                0 0 55px #f09,
+                0 0 70px #f09;
+            }
+        }
+
+        /* زر الإضاءة */
+        .light-btn {
+            background: linear-gradient(45deg, #ff00cc, #333399);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .light-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #f09;
+        }
+
+        /* القلوب المتطايرة */
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: floatUp 4s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+        }
+        
+        .hidden-content {
+            display: none;
+            animation: fadeIn 1s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- خلفية النجوم -->
+    <div class="stars" id="starsContainer"></div>
+
+    <div class="card">
+        <!-- أيقونة زخرفية -->
+        <div class="mb-4 text-5xl animate-bounce">✨</div>
+        
+        <h1 class="text-3xl mb-2">إلى صديقتي</h1>
+        <h1 class="text-5xl mb-6 glowing-text">نور</h1>
+
+        <div id="initial-message">
+            <p class="text-lg text-gray-200 mb-6">
+                لكِ رسالة خاصة، هل تودين قراءتها؟
+            </p>
+            <button class="light-btn" onclick="revealMessage()">اضغطي هنا</button>
+        </div>
+
+        <div id="full-message" class="hidden-content">
+            <p class="text-lg leading-relaxed text-gray-100 mb-4">
+                يا من تُشبهين اسمكِ تماماً..
+                <br>
+                تأتين فتنشرين الضياء في الأماكن المظلمة، وتزرعين البهجة في القلوب.
+                وجودكِ نعمة، وصداقتكِ نورٌ يضيء أيامي.
+            </p>
+            <p class="text-md text-gray-300 italic">
+                أتمنى لكِ سعادة بحجم السماء، ولمعاناً لا ينطفئ أبداً.
+            </p>
+            <br>
+            <button class="text-sm text-pink-400 underline mt-2 cursor-pointer" onclick="createHearts()">اضغطي للمزيد من الحب ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        // إنشاء خلفية النجوم
+        const starsContainer = document.getElementById('starsContainer');
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 3 + 1;
+            const duration = Math.random() * 3 + 2;
+            
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            
+            starsContainer.appendChild(star);
+        }
+
+        // دالة إظهار الرسالة
+        function revealMessage() {
+            document.getElementById('initial-message').style.display = 'none';
+            document.getElementById('full-message').style.display = 'block';
+            createHearts();
+        }
+
+        // دالة القلوب المتطايرة
+        function createHearts() {
+            const card = document.querySelector('.card');
+            for(let i=0; i<15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.classList.add('heart');
+                    
+                    // موقع عشوائي حول الزر
+                    const randomLeft = Math.random() * 100;
+                    heart.style.left = randomLeft + '%';
+                    heart.style.bottom = '20%';
+                    
+                    card.appendChild(heart);
+
+                    // إزالة العنصر بعد انتهاء الحركة لتنظيف الذاكرة
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 200);
+            }
+        }
+    </script>
+</body>
+</html>
+
